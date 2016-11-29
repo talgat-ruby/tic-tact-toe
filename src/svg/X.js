@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import "./X.css";
 
-const X = () => {
+const X = (props) => {
 	return (
-		<svg className="x" width="40" height="40" viewBox="0 0 40 40">
-			<line className="line1" x1="0" y1="0" x2="40" y2="40"></line>
-			<line className="line2" x1="0" y1="40" x2="40" y2="0"></line>
+		<svg className="x" width="50" height="50" viewBox="0 0 50 50" {...props}>
+			<line className="line1" x1="10" y1="10" x2="40" y2="40"></line>
+			<line className="line2" x1="40" y1="10" x2="10" y2="40"></line>
 		</svg>
 	);
 }
+
+X.propTypes = {
+	x: PropTypes.number.isRequired,
+	y: PropTypes.number.isRequired
+};
 
 export default X;

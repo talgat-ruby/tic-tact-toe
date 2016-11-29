@@ -1,0 +1,14 @@
+.canvas line {
+	stroke: black;
+	stroke-width: 3;
+	stroke-linecap: round;
+	animation-name: draw;
+    animation-duration: 1s;
+    animation-fill-mode: forwards; // Stay on the last frame
+    animation-iteration-count: 1; // Run only once
+    animation-timing-function: linear;
+}
+
+.canvas {
+	margin: auto;
+}

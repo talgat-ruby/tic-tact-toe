@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import X from "./svg/X";
-// import O from "./svg/O";
+import Canvas from './svg/Canvas';
 
 class App extends Component {
     render() {
         return (
-            <div>
-                <X />
+            <div className="App">
+                <Canvas/>
             </div>
         );
     }
