@@ -1,0 +1,16 @@
+.x line {
+	stroke: tomato;
+	stroke-width: 5;
+	stroke-linecap: round;
+	stroke-dasharray: 60;
+	stroke-dashoffset: 60;
+	/*animation-direction: reverse;*/
+}
+
+.line2 {
+	transition: stroke-dashoffset 2s ease-in-out;
+}
+
+.line1 {
+	transition: stroke-dashoffset 2s 2s ease-in-out;
+}
