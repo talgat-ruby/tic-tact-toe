@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { rectDimention, lineWidth, MODES, Players } from '../imports/constants';
+import AI from '../imports/AI';
 import './Canvas.css';
 
 import EmptyEl from './EmptyEl';
@@ -9,17 +11,13 @@ class Canvas extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			els: [null, null, null, 'o', null, 'o', null, null, null]
+			els: [null, null, null, 'o', null, 'o', null, null, null],
+			curTurn: PLayers.User
 		};
 
 		this.picks = {
 			user: 'x',
 			ai: 'o'
-		};
-
-		this.CONSTANT = {
-			rectDimention: 50,
-			lineWidth: 3
 		};
 
 		this.renderEls = this.renderEls.bind(this);
@@ -44,8 +42,8 @@ class Canvas extends Component {
 		const rowNum = Math.trunc(ind / 3);
 		const colNum = Math.trunc(ind % 3);
 		return {
-			x: colNum * (this.CONSTANT.rectDimention + this.CONSTANT.lineWidth),
-			y: rowNum * (this.CONSTANT.rectDimention + this.CONSTANT.lineWidth),
+			x: colNum * (rectDimention + lineWidth),
+			y: rowNum * (rectDimention + lineWidth),
 			key: ind
 		}
 	}
