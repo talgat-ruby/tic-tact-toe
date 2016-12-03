@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { rectDimention, lineWidth, MODES, Players } from '../imports/constants';
-import AI from '../imports/AI';
+import { RECT_DIMENTIONS, LINE_WIDTH, MODES, ITEMS } from '../imports/constants';
+import { AI, Judge } from '../imports/JS_logic';
 import './Canvas.css';
 
 import EmptyEl from './EmptyEl';
@@ -11,13 +11,8 @@ class Canvas extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			els: [null, null, null, 'o', null, 'o', null, null, null],
-			curTurn: PLayers.User
-		};
-
-		this.picks = {
-			user: 'x',
-			ai: 'o'
+			els: [null, null, null, null, null, null, null, null, null],
+			curTurn: 0
 		};
 
 		this.renderEls = this.renderEls.bind(this);
@@ -28,9 +23,9 @@ class Canvas extends Component {
 	renderEls() {
 		return this.state.els.map((el, ind) => {
 			switch(el) {
-				case 'x':
+				case ITEMS[0]:
 					return <X {...this.calcCoordinates(ind)} />;
-				case 'o':
+				case ITEMS[1]:
 					return <O {...this.calcCoordinates(ind)} />;
 				default:
 					return <EmptyEl {...this.calcCoordinates(ind)} onClick={() => this.handleEmptyElClick(ind)} />;
@@ -42,15 +37,23 @@ class Canvas extends Component {
 		const rowNum = Math.trunc(ind / 3);
 		const colNum = Math.trunc(ind % 3);
 		return {
-			x: colNum * (rectDimention + lineWidth),
-			y: rowNum * (rectDimention + lineWidth),
+			x: colNum * (RECT_DIMENTIONS + LINE_WIDTH),
+			y: rowNum * (RECT_DIMENTIONS + LINE_WIDTH),
 			key: ind
 		}
 	}
 
 	handleEmptyElClick(ind) {
 		this.setState({
-			els: [...this.state.els.slice(0, ind), this.picks.user, ...this.state.els.slice(ind + 1)]
+			els: [...this.state.els.slice(0, ind), ITEMS[this.state.curTurn], ...this.state.els.slice(ind + 1)]
+		});
+		this.togglePlayer();
+		Judge.handleGameState(this.state.els);
+	}
+
+	togglePlayer() {
+		this.setState(prevState => {
+			return { curTurn: (prevState.curTurn + 1) % 2 };
 		});
 	}
 

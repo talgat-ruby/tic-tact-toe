@@ -1,6 +1,6 @@
-import { MODES } from './constants';
+import { MODES, STEPS_VALIDATOR } from './constants';
 
-const AI = (() => {
+export const AI = (() => {
 	function nextMove(mode, curState) {
 		switch(mode) {
 			case MODES.EASY:
@@ -18,4 +18,12 @@ const AI = (() => {
 	return { nextMove };
 })();
 
-export default AI;
+export const Judge = (() => {
+	function handleGameState(gameState) {
+		STEPS_VALIDATOR.forEach(validator => {
+
+		});
+	}
+
+	return { handleGameState };
+})();
