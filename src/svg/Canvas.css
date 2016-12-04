@@ -1,14 +1,30 @@
+.canvas {
+	margin:  30px 0 50px 0;
+	padding: 10px;
+	box-shadow: 0 3px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
 .canvas line {
 	stroke: black;
 	stroke-width: 3;
 	stroke-linecap: round;
+}
+
+.canvas .hint {
+	stroke: tomato;
+	stroke-dasharray: 250;
+	stroke-dashoffset: 250;
 	animation-name: draw;
-    animation-duration: 1s;
-    animation-fill-mode: forwards; // Stay on the last frame
-    animation-iteration-count: 1; // Run only once
+    animation-duration: 0.25s;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
     animation-timing-function: linear;
 }
 
-.canvas {
-	margin: auto;
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+    visibility: visible;
+  }
 }

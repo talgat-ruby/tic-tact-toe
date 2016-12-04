@@ -1,0 +1,51 @@
+.info {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	animation-delay: 0.75s;
+	animation-name: displayOpacity;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+}
+
+.info.win {
+	background-color: limegreen;
+}
+
+.info.loose {
+	background-color: tomato;
+}
+
+.info.draw {
+	background-color: dodgerblue;
+}
+
+.info p {
+	color: #fff;
+	font-size: 2.4rem;
+	line-height: 0.6;
+	margin-right: 20px;
+}
+
+.info button {
+	font-size: 1.4rem;
+	font-weight: bold;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #fff;
+	background-color: #673AB7;
+	border-radius: 3px;
+	padding: 8px 50px;
+	border: none;
+	cursor: pointer;
+}
+
+
+@keyframes displayOpacity {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}

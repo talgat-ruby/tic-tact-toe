@@ -1,21 +1,39 @@
+// App States
+export const APP_STATES = {
+	START: 'Start',
+	GAME: 'Game',
+	END: 'End'
+}
+
+// Game States
+export const GAME_STATES = {
+	WIN: 'Win',
+	LOOSE: 'Loose',
+	DRAW: 'Draw',
+	IN_PROGRESS: 'In progress'
+}
+
 // Game Modes
 export const MODES = {
-	EASY: 'EASY',
-	HARD: 'HARD'
+	EASY: 'Easy',
+	HARD: 'Hard'
 };
 
 // Game players
 export const PLAYERS = {
-	User: 'User',
+	USER: 'User',
 	AI: 'AI'
 }
 
-
 // Game items to choose
-export const ITEMS = ['x', 'o'];
+export const ITEMS = ['X', 'O'];
 
-// Check which steps [next item, next sequnce group]
-export const STEPS_VALIDATOR = [[1, 3], [3, 1], [4, 2]];
+// Order direction
+export const DIRECTION = {
+	ROW: 'Row',
+	COL: 'Col',
+	DIAG: 'Diagonal'
+} 
 
 // For positioning items
 export const RECT_DIMENTIONS = 50;
