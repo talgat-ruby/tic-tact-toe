@@ -1,5 +1,3 @@
-// Combine Functions
-
 import React, { Component, PropTypes } from 'react';
 import $class from 'classnames';
 
@@ -12,7 +10,7 @@ class HomePage extends Component {
 		super(props);
 		this.state = {
 			pickedItem: ITEMS[0],
-			pickedMode: MODES.EASY
+			pickedMode: this.props.gameMode
 		}
 
 		this.renderItems = this.renderItems.bind(this);

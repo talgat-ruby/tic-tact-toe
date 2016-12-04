@@ -42,7 +42,7 @@ class App extends Component {
     renderAppChild() {
         switch(this.state.stateOfApp) {
             case APP_STATES.START:
-                return <HomePage onStartGame={this.onStartGame}/>;
+                return <HomePage onStartGame={this.onStartGame} gameMode={this.state.gameMode}/>;
             case APP_STATES.GAME:
             case APP_STATES.END:
                 return <Game {...this.state} startNewGame={this.startNewGame}/>;

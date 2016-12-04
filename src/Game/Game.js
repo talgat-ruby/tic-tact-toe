@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import { Judge } from '../imports/JS_logic';
+import { Judge, AI } from '../imports/JS_logic';
 import { ITEMS, PLAYERS, APP_STATES, MODES, GAME_STATES } from '../imports/constants';
 import './Game.css';
 
@@ -21,19 +21,41 @@ class Game extends Component {
 		this.handleEmptyElClick = this.handleEmptyElClick.bind(this);
 	}
 
-	handleEmptyElClick(ind) {
-		if(this.state.gameState === GAME_STATES.IN_PROGRESS) {
+	componentDidMount() {
+		this.checkIfAIMoves();
+	}
+
+	componentDidUpdate() {
+		this.checkIfAIMoves();
+	}
+
+	checkIfAIMoves() {
+		if(this.props.players[this.state.curTurn] === PLAYERS.AI) {
+			window.setTimeout(() => {
+				this.AI_move(this.props.gameMode, this.state.els);
+			}, 600);
+		}
+	}
+
+	handleEmptyElClick(ind, player) {
+		if(this.state.gameState === GAME_STATES.IN_PROGRESS && player === this.props.players[this.state.curTurn]) {
 			const els = [...this.state.els.slice(0, ind), ITEMS[this.state.curTurn], ...this.state.els.slice(ind + 1)];
-			this.setState({ els });
 			this.gameStateHandler(els);
-			this.togglePlayer();
 		}
 	}
 
 	gameStateHandler(els) {
 		const { gameState, hintLineData = null } = Judge.gameStateHandler(els, this.props.players);
 		const infoMes = this.getInfoMes(gameState);
-		this.setState({ gameState, infoMes, hintLineData });
+		this.setState(prevState => {
+			const curTurn = (prevState.curTurn + 1) % 2;
+			return { els, gameState, infoMes, hintLineData, curTurn };
+		});
+	}
+
+	AI_move(mode, els) {
+		const ind = AI.nextMove(mode, ITEMS[this.state.curTurn], els);
+		this.handleEmptyElClick(ind, PLAYERS.AI);
 	}
 
 	getInfoMes(gameState) {
@@ -47,12 +69,6 @@ class Game extends Component {
 			default:
 				return '';
 		}
-	}
-
-	togglePlayer() {
-		this.setState(prevState => {
-			return { curTurn: (prevState.curTurn + 1) % 2 };
-		});
 	}
 
 	render() {

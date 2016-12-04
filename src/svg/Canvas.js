@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 
 import { RECT_DIMENTIONS, LINE_WIDTH, ITEMS, PLAYERS, DIRECTION } from '../imports/constants';
-import { AI } from '../imports/JS_logic';
 import './Canvas.css';
 
 import EmptyEl from './EmptyEl';
@@ -27,13 +26,12 @@ const Canvas = ({ els, handleEmptyElClick, hintLineData  }) => {
 				case ITEMS[1]:
 					return <O {...calcCoordinates(ind)} />;
 				default:
-					return <EmptyEl {...calcCoordinates(ind)} onClick={() => handleEmptyElClick(ind)} />;
+					return <EmptyEl {...calcCoordinates(ind)} onClick={() => handleEmptyElClick(ind, PLAYERS.USER)} />;
 			}
 		})
 	};
 
 	const renderHintLine = ({ orderDirection, orderDirectionInd }) => {
-		console.log(orderDirection, orderDirectionInd);
 		switch(orderDirection) {
 			case DIRECTION.ROW:
 				const y = (orderDirectionInd * (RECT_DIMENTIONS + LINE_WIDTH)) + (RECT_DIMENTIONS / 2);
@@ -77,9 +75,8 @@ const Canvas = ({ els, handleEmptyElClick, hintLineData  }) => {
 
 Canvas.propTypes = {
 	els: PropTypes.arrayOf(PropTypes.oneOf([...ITEMS, null])).isRequired,
-	// players: PropTypes.arrayOf(PropTypes.oneOf(Object.values(PLAYERS))).isRequired,
 	handleEmptyElClick: PropTypes.func.isRequired,
-	// hintLineData: PropTypes.obj.isRequired
+	hintLineData: PropTypes.any
 }
 
 export default Canvas;
